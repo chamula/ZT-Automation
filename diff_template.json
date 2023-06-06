@@ -1,0 +1,128 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+        "policySetName": "ZT-testpol",
+        "policySetDisplayName": "ZT-testpol",
+        "policySetDescription": "Used to test extraction of Policy Definitions to create an ARM Template.  Can delete upon completing the test."
+
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Authorization/policySetDefinitions",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('policySetName')]",
+            "properties": {
+                "displayName": "[variables('policySetDisplayName')]",
+                "description": "[variables('policySetDescription')]",
+                "policyType": "Custom",
+                "metadata": {
+                    "category": "Tags"
+                },
+                "parameters": {},
+                "PolicyDefinitionGroups": [
+                    {
+                        "name": "Identity",
+                        "displayName": "Identity"
+                    },
+                    {
+                        "name": "Application",
+                        "displayName": "Application"
+                    },
+                    {
+                        "name": "Data",
+                        "displayName": "Data"
+                    }
+                    ],
+                "policyDefinitions": [
+                    {
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/81b3ccb4-e6e8-4e4a-8d05-5df25cd29fd4",
+                        "policyDefinitionReferenceId": "Accounts with read permissions on Azure resources should be MFA enabled_1",
+                        "parameters": {},
+                        "groupNames": [
+                            "Identity"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Accounts with write permissions on Azure resources should be MFA enabled_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/931e118d-50a1-4457-a5e4-78550e086c52",
+                        "parameters": {},
+                        "groupNames": [
+                        "Identity"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Audit Windows machines that have extra accounts in the Administrators group_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3d2a3320-2a72-4c67-ac5f-caa40fbee2b2",
+                        "parameters": {},
+                        "groupNames": [
+                        "Identity"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "App Service apps that use PHP should use a specified 'PHP version'_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7261b898-8a84-4db8-9e04-18527132abb3",
+                        "parameters": {},
+                        "groupNames": [
+                        "Application"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Azure File Sync should use private link_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1d320205-c6a1-4ac6-873d-46224024e8e2",
+                        "parameters": {},
+                        "groupNames": [
+                        "Data"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Azure Active Directory should use private link to access Azure services_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2e9411a0-0c5a-44b3-9ddb-ff10a1a2bf28",
+                        "parameters": {},
+                        "groupNames": [
+                        "Identity"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Azure Cognitive Search services should use private link_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0fda3595-9f2b-4592-8675-4231d6fa82fe",
+                        "parameters": {},
+                        "groupNames": [
+                        "Data"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Cognitive Services should use private link_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/cddd188c-4b82-4c48-a19d-ddf74ee66a01",
+                        "parameters": {},
+                        "groupNames": [
+                        "Data",
+                        "Application"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Azure Cognitive Search service should use a SKU that supports private link_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a049bf77-880b-470f-ba6d-9f21c530cf83",
+                        "parameters": {},
+                        "groupNames": [
+                        "Application",
+                        "Data"
+                        ]
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Network Watcher should be enabled_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b6e2945c-0b7b-40f5-9233-7a5323b5cdc6",
+                        "parameters": {},
+                        "groupNames": []
+                    },
+                    {
+                        "policyDefinitionReferenceId": "Windows web servers should be configured to use secure communication protocols_1",
+                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/5752e6d6-1206-46d8-8ab1-ecc2f71a8112",
+                        "parameters": {},
+                        "groupNames": []
+                    }
+                ]
+            }
+        }
+    ]
+}
