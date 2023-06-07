@@ -79,30 +79,6 @@
                         },
                         "defaultValue": "[[parameters('logAnalytics')]"
                     },
-                    "pHPLatestVersionForAppServices": {
-                        "type": "String",
-                        "metadata": {
-                        "displayName": "Latest PHP version for App Services",
-                        "description": "Latest supported PHP version for App Services"
-                        },
-                        "defaultValue": "7.4"
-                    },
-                    "javaLatestVersionForAppServices": {
-                        "type": "String",
-                        "metadata": {
-                        "displayName": "Latest Java version for App Services",
-                        "description": "Latest supported Java version for App Services"
-                        },
-                        "defaultValue": "11"
-                    },
-                    "linuxPythonLatestVersionForAppServices": {
-                        "type": "String",
-                        "metadata": {
-                        "displayName": "Latest Python version for Linux for App Services",
-                        "description": "Latest supported Python version for App Services"
-                        },
-                        "defaultValue": "3.9"
-                    },
                     "minimumTLSVersionForWindowsServers": {
                         "type": "String",
                         "metadata": {
@@ -128,19 +104,6 @@
                         ],
                         "defaultValue": "Audit"
                     },
-                    "effect-40cec1dd-a100-4920-b15b-3024fe8901ab": {
-                        "type": "String",
-                        "metadata": {
-                        "displayName": "Effect for policy: Azure Machine Learning workspaces should use private link",
-                        "description": "The effect determines what happens when the policy rule is evaluated to match; for more information about effects, visit https://aka.ms/policyeffects"
-                        },
-                        "allowedValues": [
-                        "Audit",
-                        "Deny",
-                        "Disabled"
-                        ],
-                        "defaultValue": "Audit"
-                    },
                     "effect-2154edb9-244f-4741-9970-660785bccdaa": {
                         "type": "String",
                         "metadata": {
@@ -151,19 +114,6 @@
                         "Audit",
                         "Disabled",
                         "Deny"
-                        ],
-                        "defaultValue": "Audit"
-                    },
-                    "effect-5f0bc445-3935-4915-9981-011aa2b46147": {
-                        "type": "String",
-                        "metadata": {
-                        "displayName": "Effect for policy: [Preview]: Private endpoint should be configured for Key Vault",
-                        "description": "The effect determines what happens when the policy rule is evaluated to match; for more information about effects, visit https://aka.ms/policyeffects"
-                        },
-                        "allowedValues": [
-                        "Audit",
-                        "Deny",
-                        "Disabled"
                         ],
                         "defaultValue": "Audit"
                     },
@@ -400,14 +350,6 @@
                         "description": null
                         },
                         "defaultValue": "365"
-                    },
-                    "includeAKSClusters-7c1b1214-f927-48bf-8882-84f0af6588b1": {
-                        "type": "Boolean",
-                        "metadata": {
-                        "displayName": "Include AKS clusters when auditing if virtual machine scale set diagnostic logs are enabled",
-                        "description": "For more information, visit https://aka.ms/kubepolicydoc"
-                        },
-                        "defaultValue": false
                     },
                     "setting-a6fb4358-5bf4-4ad7-ba82-2cd2f41ce5e9": {
                         "type": "String",
