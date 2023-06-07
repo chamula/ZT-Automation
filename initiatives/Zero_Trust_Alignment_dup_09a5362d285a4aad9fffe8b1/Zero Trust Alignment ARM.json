@@ -1,6 +1,21 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "parameters": {
+        "logAnalytics": {
+            "type": "string",
+            "defaultValue": "logAnalyticsWorkspaceID"
+        },
+        "excludeInAdminGroup": {
+            "type": "string",
+            "defaultValue": "excludeInAdminGroup"
+        },
+        "includeInAdminGroup": {
+            "type": "string",
+            "defaultValue": "includeInAdminGroup"
+        }
+
+    },
     "variables": {
         "policySetName": "Zero Trust Policy Set",
         "policySetDisplayName": "Zero Trust Alignment",
@@ -37,14 +52,16 @@
                         "metadata": {
                         "displayName": "List of users that should be excluded from Windows virtual machines' Administrators group",
                         "description": "A semicolon-separated list of users  that should be excluded in the Administrators local group. Ex: Administrator; myUser1; myUser2"
-                        }
+                        },
+                        "defaultValue": "[[parameters('excludeInAdminGroup')]"
                     },
                     "membersToIncludeInLocalAdministratorsGroup": {
                         "type": "String",
                         "metadata": {
                         "displayName": "List of users that should be included in Windows virtual machines' Administrators group",
                         "description": "A semicolon-separated list of users that should be included in the Administrators local group; Ex: Administrator; myUser1; myUser2"
-                        }
+                        },
+                        "defaultValue": "[[parameters('includeInAdminGroup')]"
                     },
                     "NetworkWatcherResourceGroupName": {
                         "type": "String",
@@ -59,7 +76,8 @@
                         "metadata": {
                         "displayName": "Log Analytics workspace ID for virtual machine agent reporting",
                         "description": "ID (GUID) of the Log Analytics workspace where virtual machine agents should report"
-                        }
+                        },
+                        "defaultValue": "[[parameters('logAnalytics')]"
                     },
                     "pHPLatestVersionForAppServices": {
                         "type": "String",
@@ -1527,6 +1545,10 @@
                         "displayName": "Network Pillar"
                     },
                     {
+                        "name": "Infrastructure",
+                        "displayName": "Infrastructure Pillar"
+                    },
+                    {
                         "name": "DoDZT_1.1_User_Inventory",
                         "category": "Identity",
                         "displayName": "1.1 User Inventory"
@@ -1759,7 +1781,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea53dbee-c6c9-4f0e-9f9e-de0039b78023",
                         "parameters": {
                             "IncludeArcMachines": {
-                                "value": "[parameters('IncludeArcMachines')]"
+                                "value": "[[parameters('IncludeArcMachines')]"
                             }
                         },
                         "groupNames": [
@@ -1772,7 +1794,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/34c877ad-507e-4c82-993e-3452a6e0ad3c",
                         "parameters": {
                             "effect": {
-                                "value": "[parameters('effect-34c877ad-507e-4c82-993e-3452a6e0ad3c')]"
+                                "value": "[[parameters('effect-34c877ad-507e-4c82-993e-3452a6e0ad3c')]"
                             }
                         },
                         "groupNames": [
@@ -1794,7 +1816,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2154edb9-244f-4741-9970-660785bccdaa",
                         "parameters": {
                             "effect": {
-                                "value": "[parameters('effect-2154edb9-244f-4741-9970-660785bccdaa')]"
+                                "value": "[[parameters('effect-2154edb9-244f-4741-9970-660785bccdaa')]"
                             }
                         },
                         "groupNames": [
@@ -1807,10 +1829,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/af35e2a4-ef96-44e7-a9ae-853dd97032c4",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-af35e2a4-ef96-44e7-a9ae-853dd97032c4')]"
+                            "value": "[[parameters('effect-af35e2a4-ef96-44e7-a9ae-853dd97032c4')]"
                         },
                         "evaluatedSkuNames": {
-                            "value": "[parameters('evaluatedSkuNames-af35e2a4-ef96-44e7-a9ae-853dd97032c4')]"
+                            "value": "[[parameters('evaluatedSkuNames-af35e2a4-ef96-44e7-a9ae-853dd97032c4')]"
                         }
                         },
                         "groupNames": [
@@ -1824,7 +1846,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a049bf77-880b-470f-ba6d-9f21c530cf83",
                         "parameters": {
                             "effect": {
-                                "value": "[parameters('effect-a049bf77-880b-470f-ba6d-9f21c530cf83')]"
+                                "value": "[[parameters('effect-a049bf77-880b-470f-ba6d-9f21c530cf83')]"
                             }
                         },
                         "groupNames": [
@@ -2095,7 +2117,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b54ed75b-3e1a-44ac-a333-05ba39b99ff0",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-b54ed75b-3e1a-44ac-a333-05ba39b99ff0')]"
+                            "value": "[[parameters('effect-b54ed75b-3e1a-44ac-a333-05ba39b99ff0')]"
                         }
                         },
                         "groupNames": [
@@ -2109,7 +2131,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/71ef260a-8f18-47b7-abcb-62d0673d94dc",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-71ef260a-8f18-47b7-abcb-62d0673d94dc')]"
+                            "value": "[[parameters('effect-71ef260a-8f18-47b7-abcb-62d0673d94dc')]"
                         }
                         },
                         "groupNames": [
@@ -2197,7 +2219,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/630c64f9-8b6b-4c64-b511-6544ceff6fd6",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -2211,7 +2233,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f6ec09a3-78bf-4f8f-99dc-6c77182d0f99",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -2224,7 +2246,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1d84d5fb-01f6-4d12-ba4f-4a26081d403d",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1d84d5fb-01f6-4d12-ba4f-4a26081d403d')]"
+                            "value": "[[parameters('effect-1d84d5fb-01f6-4d12-ba4f-4a26081d403d')]"
                         }
                         },
                         "groupNames": [
@@ -2237,7 +2259,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/37e0d2fe-28a5-43d6-a273-67d37d1f5606",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-37e0d2fe-28a5-43d6-a273-67d37d1f5606')]"
+                            "value": "[[parameters('effect-37e0d2fe-28a5-43d6-a273-67d37d1f5606')]"
                         }
                         },
                         "groupNames": [
@@ -2278,7 +2300,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ef619a2c-cc4d-4d03-b2ba-8c94a834d85b",
                         "parameters": {
                         "evaluatedSkuNames": {
-                            "value": "[parameters('evaluatedSkuNames-ef619a2c-cc4d-4d03-b2ba-8c94a834d85b')]"
+                            "value": "[[parameters('evaluatedSkuNames-ef619a2c-cc4d-4d03-b2ba-8c94a834d85b')]"
                         }
                         },
                         "groupNames": [
@@ -2293,7 +2315,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/862e97cf-49fc-4a5c-9de4-40d4e2e7c8eb",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-862e97cf-49fc-4a5c-9de4-40d4e2e7c8eb')]"
+                            "value": "[[parameters('effect-862e97cf-49fc-4a5c-9de4-40d4e2e7c8eb')]"
                         }
                         },
                         "groupNames": [
@@ -2306,7 +2328,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/d0793b48-0edc-4296-a390-4c75d1bdfd71",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-d0793b48-0edc-4296-a390-4c75d1bdfd71')]"
+                            "value": "[[parameters('effect-d0793b48-0edc-4296-a390-4c75d1bdfd71')]"
                         }
                         },
                         "groupNames": [
@@ -2320,7 +2342,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2a1a9cdf-e04d-429a-8416-3bfb72a1b26f",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-2a1a9cdf-e04d-429a-8416-3bfb72a1b26f')]"
+                            "value": "[[parameters('effect-2a1a9cdf-e04d-429a-8416-3bfb72a1b26f')]"
                         }
                         },
                         "groupNames": [
@@ -2334,7 +2356,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/55615ac9-af46-4a59-874e-391cc3dfb490",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-55615ac9-af46-4a59-874e-391cc3dfb490')]"
+                            "value": "[[parameters('effect-55615ac9-af46-4a59-874e-391cc3dfb490')]"
                         }
                         },
                         "groupNames": [
@@ -2348,7 +2370,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1b8ca024-1d5c-4dec-8995-b1a932b41780",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1b8ca024-1d5c-4dec-8995-b1a932b41780')]"
+                            "value": "[[parameters('effect-1b8ca024-1d5c-4dec-8995-b1a932b41780')]"
                         }
                         },
                         "groupNames": [
@@ -2362,7 +2384,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/037eea7a-bd0a-46c5-9a66-03aea78705d3",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-037eea7a-bd0a-46c5-9a66-03aea78705d3')]"
+                            "value": "[[parameters('effect-037eea7a-bd0a-46c5-9a66-03aea78705d3')]"
                         }
                         },
                         "groupNames": [
@@ -2375,7 +2397,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0725b4dd-7e76-479c-a735-68e7ee23d5ca",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-0725b4dd-7e76-479c-a735-68e7ee23d5ca')]"
+                            "value": "[[parameters('effect-0725b4dd-7e76-479c-a735-68e7ee23d5ca')]"
                         }
                         },
                         "groupNames": [
@@ -2388,7 +2410,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/4fa4b6c0-31ca-4c0d-b10d-24b96f62a751",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-4fa4b6c0-31ca-4c0d-b10d-24b96f62a751')]"
+                            "value": "[[parameters('effect-4fa4b6c0-31ca-4c0d-b10d-24b96f62a751')]"
                         }
                         },
                         "groupNames": [
@@ -2401,7 +2423,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ee980b6d-0eca-4501-8d54-f6290fd512c3",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-ee980b6d-0eca-4501-8d54-f6290fd512c3')]"
+                            "value": "[[parameters('effect-ee980b6d-0eca-4501-8d54-f6290fd512c3')]"
                         }
                         },
                         "groupNames": [
@@ -2566,7 +2588,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/383856f8-de7f-44a2-81fc-e5135b5c2aa4",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2579,7 +2601,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f9be5368-9bf5-4b84-9e0a-7850da98bb46",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2592,7 +2614,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f8d36e2f-389b-4ee4-898d-21aeb69a0f45",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2605,7 +2627,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b4330a05-a843-4bc8-bf9a-cacce50c67f4",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2618,7 +2640,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/34f95f76-5386-4de7-b824-0d8478470c9d",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2631,7 +2653,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/cf820ca0-f99e-4f3e-84fb-66e913812d21",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2644,7 +2666,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/83a214f7-d01a-484b-91a9-ed54470c9a6a",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2657,7 +2679,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/057ef27e-665e-4328-8ea3-04b3122bd9fb",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2670,7 +2692,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c95c74d9-38fe-4f0d-af86-0c7d626a315c",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2683,7 +2705,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/428256e6-1fac-4f48-a757-df34c2b3336d",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -2696,7 +2718,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b6e2945c-0b7b-40f5-9233-7a5323b5cdc6",
                         "parameters": {
                         "resourceGroupName": {
-                            "value": "[parameters('NetworkWatcherResourceGroupName')]"
+                            "value": "[[parameters('NetworkWatcherResourceGroupName')]"
                         }
                         },
                         "groupNames": [
@@ -2709,7 +2731,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a6fb4358-5bf4-4ad7-ba82-2cd2f41ce5e9",
                         "parameters": {
                         "setting": {
-                            "value": "[parameters('setting-a6fb4358-5bf4-4ad7-ba82-2cd2f41ce5e9')]"
+                            "value": "[[parameters('setting-a6fb4358-5bf4-4ad7-ba82-2cd2f41ce5e9')]"
                         }
                         },
                         "groupNames": [
@@ -2997,7 +3019,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/91a78b24-f231-4a8a-8da9-02c35b2b6510",
                         "parameters": {
                         "requiredRetentionDays": {
-                            "value": "[parameters('requiredRetentionDays')]"
+                            "value": "[[parameters('requiredRetentionDays')]"
                         }
                         },
                         "groupNames": [
@@ -3010,7 +3032,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/72650e9f-97bc-4b2a-ab5f-9781a9fcecbc",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -3023,7 +3045,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/fc9b3da7-8347-4380-8e70-0a0361d8dedd",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -3036,22 +3058,22 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/febd0533-8e55-448f-b837-bd0e06f16469",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-febd0533-8e55-448f-b837-bd0e06f16469')]"
+                            "value": "[[parameters('effect-febd0533-8e55-448f-b837-bd0e06f16469')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "allowedContainerImagesRegex": {
-                            "value": "[parameters('allowedContainerImagesRegex-febd0533-8e55-448f-b837-bd0e06f16469')]"
+                            "value": "[[parameters('allowedContainerImagesRegex-febd0533-8e55-448f-b837-bd0e06f16469')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3065,19 +3087,19 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/95edb821-ddaf-4404-9732-666045e056b4",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-95edb821-ddaf-4404-9732-666045e056b4')]"
+                            "value": "[[parameters('effect-95edb821-ddaf-4404-9732-666045e056b4')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3091,19 +3113,19 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/233a2a17-77ca-4fb1-9b6b-69223d272a44",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-233a2a17-77ca-4fb1-9b6b-69223d272a44')]"
+                            "value": "[[parameters('effect-233a2a17-77ca-4fb1-9b6b-69223d272a44')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "allowedServicePortsList": {
-                            "value": "[parameters('allowedServicePortsList-233a2a17-77ca-4fb1-9b6b-69223d272a44')]"
+                            "value": "[[parameters('allowedServicePortsList-233a2a17-77ca-4fb1-9b6b-69223d272a44')]"
                         }
                         },
                         "groupNames": [
@@ -3117,25 +3139,25 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e345eecc-fa47-480f-9e88-67dcc122b164",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-e345eecc-fa47-480f-9e88-67dcc122b164')]"
+                            "value": "[[parameters('effect-e345eecc-fa47-480f-9e88-67dcc122b164')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "cpuLimit": {
-                            "value": "[parameters('cpuLimit-e345eecc-fa47-480f-9e88-67dcc122b164')]"
+                            "value": "[[parameters('cpuLimit-e345eecc-fa47-480f-9e88-67dcc122b164')]"
                         },
                         "memoryLimit": {
-                            "value": "[parameters('memoryLimit-e345eecc-fa47-480f-9e88-67dcc122b164')]"
+                            "value": "[[parameters('memoryLimit-e345eecc-fa47-480f-9e88-67dcc122b164')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3148,43 +3170,43 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f06ddb64-5fa3-4b77-b166-acb36f7f6042",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('effect-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "runAsUserRule": {
-                            "value": "[parameters('runAsUserRule-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('runAsUserRule-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "runAsUserRanges": {
-                            "value": "[parameters('runAsUserRanges-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('runAsUserRanges-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "runAsGroupRule": {
-                            "value": "[parameters('runAsGroupRule-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('runAsGroupRule-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "runAsGroupRanges": {
-                            "value": "[parameters('runAsGroupRanges-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('runAsGroupRanges-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "supplementalGroupsRule": {
-                            "value": "[parameters('supplementalGroupsRule-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('supplementalGroupsRule-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "supplementalGroupsRanges": {
-                            "value": "[parameters('supplementalGroupsRanges-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('supplementalGroupsRanges-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "fsGroupRule": {
-                            "value": "[parameters('fsGroupRule-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('fsGroupRule-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "fsGroupRanges": {
-                            "value": "[parameters('fsGroupRanges-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
+                            "value": "[[parameters('fsGroupRanges-f06ddb64-5fa3-4b77-b166-acb36f7f6042')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3198,19 +3220,19 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1c6e92c9-99f0-4e55-9cf2-0c234dc48f99",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1c6e92c9-99f0-4e55-9cf2-0c234dc48f99')]"
+                            "value": "[[parameters('effect-1c6e92c9-99f0-4e55-9cf2-0c234dc48f99')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3224,16 +3246,16 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/47a1ee2f-2a2a-4576-bf2a-e0e36709c2b8",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-47a1ee2f-2a2a-4576-bf2a-e0e36709c2b8')]"
+                            "value": "[[parameters('effect-47a1ee2f-2a2a-4576-bf2a-e0e36709c2b8')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         }
                         },
                         "groupNames": [
@@ -3247,19 +3269,19 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/df49d893-a74c-421d-bc95-c663042e5b80",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-df49d893-a74c-421d-bc95-c663042e5b80')]"
+                            "value": "[[parameters('effect-df49d893-a74c-421d-bc95-c663042e5b80')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3272,25 +3294,25 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c26596ff-4d70-4e6a-9a30-c2506bd2f80c",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-c26596ff-4d70-4e6a-9a30-c2506bd2f80c')]"
+                            "value": "[[parameters('effect-c26596ff-4d70-4e6a-9a30-c2506bd2f80c')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "allowedCapabilities": {
-                            "value": "[parameters('allowedCapabilities-c26596ff-4d70-4e6a-9a30-c2506bd2f80c')]"
+                            "value": "[[parameters('allowedCapabilities-c26596ff-4d70-4e6a-9a30-c2506bd2f80c')]"
                         },
                         "requiredDropCapabilities": {
-                            "value": "[parameters('requiredDropCapabilities-c26596ff-4d70-4e6a-9a30-c2506bd2f80c')]"
+                            "value": "[[parameters('requiredDropCapabilities-c26596ff-4d70-4e6a-9a30-c2506bd2f80c')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3303,22 +3325,22 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/511f5417-5d12-434d-ab2e-816901e72a5e",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-511f5417-5d12-434d-ab2e-816901e72a5e')]"
+                            "value": "[[parameters('effect-511f5417-5d12-434d-ab2e-816901e72a5e')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "allowedProfiles": {
-                            "value": "[parameters('allowedProfiles-511f5417-5d12-434d-ab2e-816901e72a5e')]"
+                            "value": "[[parameters('allowedProfiles-511f5417-5d12-434d-ab2e-816901e72a5e')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3331,28 +3353,28 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/82985f06-dc18-4a48-bc1c-b9f4f0098cfe",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-82985f06-dc18-4a48-bc1c-b9f4f0098cfe')]"
+                            "value": "[[parameters('effect-82985f06-dc18-4a48-bc1c-b9f4f0098cfe')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "allowHostNetwork": {
-                            "value": "[parameters('allowHostNetwork-82985f06-dc18-4a48-bc1c-b9f4f0098cfe')]"
+                            "value": "[[parameters('allowHostNetwork-82985f06-dc18-4a48-bc1c-b9f4f0098cfe')]"
                         },
                         "minPort": {
-                            "value": "[parameters('minPort-82985f06-dc18-4a48-bc1c-b9f4f0098cfe')]"
+                            "value": "[[parameters('minPort-82985f06-dc18-4a48-bc1c-b9f4f0098cfe')]"
                         },
                         "maxPort": {
-                            "value": "[parameters('maxPort-82985f06-dc18-4a48-bc1c-b9f4f0098cfe')]"
+                            "value": "[[parameters('maxPort-82985f06-dc18-4a48-bc1c-b9f4f0098cfe')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3367,22 +3389,22 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/098fc59e-46c7-4d99-9b16-64990e543d75",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-098fc59e-46c7-4d99-9b16-64990e543d75')]"
+                            "value": "[[parameters('effect-098fc59e-46c7-4d99-9b16-64990e543d75')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         },
                         "allowedHostPaths": {
-                            "value": "[parameters('allowedHostPaths-098fc59e-46c7-4d99-9b16-64990e543d75')]"
+                            "value": "[[parameters('allowedHostPaths-098fc59e-46c7-4d99-9b16-64990e543d75')]"
                         },
                         "excludedContainers": {
-                            "value": "[parameters('excludedContainers')]"
+                            "value": "[[parameters('excludedContainers')]"
                         }
                         },
                         "groupNames": [
@@ -3452,7 +3474,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e6955644-301c-44b5-a4c4-528577de6861",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -3465,7 +3487,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/da0f98fe-a24b-4ad5-af69-bd0400233661",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -3478,10 +3500,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0a075868-4c26-42ef-914c-5bc007359560",
                         "parameters": {
                         "maximumValidityInMonths": {
-                            "value": "[parameters('maximumValidityInMonths-0a075868-4c26-42ef-914c-5bc007359560')]"
+                            "value": "[[parameters('maximumValidityInMonths-0a075868-4c26-42ef-914c-5bc007359560')]"
                         },
                         "effect": {
-                            "value": "[parameters('effect-0a075868-4c26-42ef-914c-5bc007359560')]"
+                            "value": "[[parameters('effect-0a075868-4c26-42ef-914c-5bc007359560')]"
                         }
                         },
                         "groupNames": [
@@ -3494,7 +3516,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/98728c90-32c7-4049-8429-847dc0f4fe37",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-98728c90-32c7-4049-8429-847dc0f4fe37')]"
+                            "value": "[[parameters('effect-98728c90-32c7-4049-8429-847dc0f4fe37')]"
                         }
                         },
                         "groupNames": [
@@ -3508,7 +3530,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/152b15f7-8e1f-4c1f-ab71-8c010ba5dbc0",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-152b15f7-8e1f-4c1f-ab71-8c010ba5dbc0')]"
+                            "value": "[[parameters('effect-152b15f7-8e1f-4c1f-ab71-8c010ba5dbc0')]"
                         }
                         },
                         "groupNames": [
@@ -3522,7 +3544,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/5b054a0d-39e2-4d53-bea3-9734cad2c69b",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -3535,7 +3557,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/bf16e0bb-31e1-4646-8202-60a235cc7e74",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -3548,7 +3570,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a2d0e922-65d0-40c4-8f87-ea6da2d307a2",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         }
                         },
                         "groupNames": [
@@ -3592,7 +3614,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0b60c0b2-2dc2-4e1c-b5c9-abbed971de53",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-0b60c0b2-2dc2-4e1c-b5c9-abbed971de53')]"
+                            "value": "[[parameters('effect-0b60c0b2-2dc2-4e1c-b5c9-abbed971de53')]"
                         }
                         },
                         "groupNames": [
@@ -3605,7 +3627,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1e66c121-a66a-4b1f-9b83-0fd99bf0fc2d",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1e66c121-a66a-4b1f-9b83-0fd99bf0fc2d')]"
+                            "value": "[[parameters('effect-1e66c121-a66a-4b1f-9b83-0fd99bf0fc2d')]"
                         }
                         },
                         "groupNames": [
@@ -3765,7 +3787,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/055aa869-bc98-4af8-bafc-23f1ab6ffe2c",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-055aa869-bc98-4af8-bafc-23f1ab6ffe2c')]"
+                            "value": "[[parameters('effect-055aa869-bc98-4af8-bafc-23f1ab6ffe2c')]"
                         }
                         },
                         "groupNames": [
@@ -3778,7 +3800,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/564feb30-bf6a-4854-b4bb-0d2d2d1e6c66",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-564feb30-bf6a-4854-b4bb-0d2d2d1e6c66')]"
+                            "value": "[[parameters('effect-564feb30-bf6a-4854-b4bb-0d2d2d1e6c66')]"
                         }
                         },
                         "groupNames": [
@@ -3791,10 +3813,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/5752e6d6-1206-46d8-8ab1-ecc2f71a8112",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         },
                         "MinimumTLSVersion": {
-                            "value": "[parameters('minimumTLSVersionForWindowsServers')]"
+                            "value": "[[parameters('minimumTLSVersionForWindowsServers')]"
                         }
                         },
                         "groupNames": [
@@ -3808,16 +3830,16 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1a5b4dca-0b6f-4cf5-907c-56316bc1bf3d",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1a5b4dca-0b6f-4cf5-907c-56316bc1bf3d')]"
+                            "value": "[[parameters('effect-1a5b4dca-0b6f-4cf5-907c-56316bc1bf3d')]"
                         },
                         "excludedNamespaces": {
-                            "value": "[parameters('excludedNamespaces')]"
+                            "value": "[[parameters('excludedNamespaces')]"
                         },
                         "namespaces": {
-                            "value": "[parameters('namespaces')]"
+                            "value": "[[parameters('namespaces')]"
                         },
                         "labelSelector": {
-                            "value": "[parameters('labelSelector')]"
+                            "value": "[[parameters('labelSelector')]"
                         }
                         },
                         "groupNames": [
@@ -3832,7 +3854,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/d9da03a1-f3c3-412a-9709-947156872263",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-d9da03a1-f3c3-412a-9709-947156872263')]"
+                            "value": "[[parameters('effect-d9da03a1-f3c3-412a-9709-947156872263')]"
                         }
                         },
                         "groupNames": [
@@ -3847,7 +3869,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/22bee202-a82f-4305-9a2a-6d7f44d4dedb",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-22bee202-a82f-4305-9a2a-6d7f44d4dedb')]"
+                            "value": "[[parameters('effect-22bee202-a82f-4305-9a2a-6d7f44d4dedb')]"
                         }
                         },
                         "groupNames": [
@@ -3861,7 +3883,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/404c3081-a854-4457-ae30-26a93ef643f9",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-404c3081-a854-4457-ae30-26a93ef643f9')]"
+                            "value": "[[parameters('effect-404c3081-a854-4457-ae30-26a93ef643f9')]"
                         }
                         },
                         "groupNames": [
@@ -3964,10 +3986,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/86efb160-8de7-451d-bc08-5d475b0aadae",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-86efb160-8de7-451d-bc08-5d475b0aadae')]"
+                            "value": "[[parameters('effect-86efb160-8de7-451d-bc08-5d475b0aadae')]"
                         },
                         "supportedSKUs": {
-                            "value": "[parameters('supportedSKUs-86efb160-8de7-451d-bc08-5d475b0aadae')]"
+                            "value": "[[parameters('supportedSKUs-86efb160-8de7-451d-bc08-5d475b0aadae')]"
                         }
                         },
                         "groupNames": [
@@ -3980,7 +4002,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/4ec52d6d-beb7-40c4-9a9e-fe753254690e",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-4ec52d6d-beb7-40c4-9a9e-fe753254690e')]"
+                            "value": "[[parameters('effect-4ec52d6d-beb7-40c4-9a9e-fe753254690e')]"
                         }
                         },
                         "groupNames": [
@@ -3993,7 +4015,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/64d314f6-6062-4780-a861-c23e8951bee5",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-64d314f6-6062-4780-a861-c23e8951bee5')]"
+                            "value": "[[parameters('effect-64d314f6-6062-4780-a861-c23e8951bee5')]"
                         }
                         },
                         "groupNames": [
@@ -4006,7 +4028,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1fd32ebd-e4c3-4e13-a54a-d7422d4d95f6",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1fd32ebd-e4c3-4e13-a54a-d7422d4d95f6')]"
+                            "value": "[[parameters('effect-1fd32ebd-e4c3-4e13-a54a-d7422d4d95f6')]"
                         }
                         },
                         "groupNames": [
@@ -4019,7 +4041,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/fa298e57-9444-42ba-bf04-86e8470e32c7",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-fa298e57-9444-42ba-bf04-86e8470e32c7')]"
+                            "value": "[[parameters('effect-fa298e57-9444-42ba-bf04-86e8470e32c7')]"
                         }
                         },
                         "groupNames": [
@@ -4032,7 +4054,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/67121cc7-ff39-4ab8-b7e3-95b84dab487d",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-67121cc7-ff39-4ab8-b7e3-95b84dab487d')]"
+                            "value": "[[parameters('effect-67121cc7-ff39-4ab8-b7e3-95b84dab487d')]"
                         }
                         },
                         "groupNames": [
@@ -4045,7 +4067,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1f905d99-2ab7-462c-a6b0-f709acca6c8f",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1f905d99-2ab7-462c-a6b0-f709acca6c8f')]"
+                            "value": "[[parameters('effect-1f905d99-2ab7-462c-a6b0-f709acca6c8f')]"
                         }
                         },
                         "groupNames": [
@@ -4058,7 +4080,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/5b9159ae-1701-4a6f-9a7a-aa9c8ddd0580",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-5b9159ae-1701-4a6f-9a7a-aa9c8ddd0580')]"
+                            "value": "[[parameters('effect-5b9159ae-1701-4a6f-9a7a-aa9c8ddd0580')]"
                         }
                         },
                         "groupNames": [
@@ -4071,7 +4093,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ba769a63-b8cc-4b2d-abf6-ac33c7204be8",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-ba769a63-b8cc-4b2d-abf6-ac33c7204be8')]"
+                            "value": "[[parameters('effect-ba769a63-b8cc-4b2d-abf6-ac33c7204be8')]"
                         }
                         },
                         "groupNames": [
@@ -4084,7 +4106,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/81e74cea-30fd-40d5-802f-d72103c2aaaa",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-81e74cea-30fd-40d5-802f-d72103c2aaaa')]"
+                            "value": "[[parameters('effect-81e74cea-30fd-40d5-802f-d72103c2aaaa')]"
                         }
                         },
                         "groupNames": [
@@ -4097,7 +4119,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0aa61e00-0a01-4a3c-9945-e93cffedf0e6",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-0aa61e00-0a01-4a3c-9945-e93cffedf0e6')]"
+                            "value": "[[parameters('effect-0aa61e00-0a01-4a3c-9945-e93cffedf0e6')]"
                         }
                         },
                         "groupNames": [
@@ -4110,7 +4132,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/47031206-ce96-41f8-861b-6a915f3de284",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-47031206-ce96-41f8-861b-6a915f3de284')]"
+                            "value": "[[parameters('effect-47031206-ce96-41f8-861b-6a915f3de284')]"
                         }
                         },
                         "groupNames": [
@@ -4123,7 +4145,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/87ba29ef-1ab3-4d82-b763-87fcd4f531f7",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-87ba29ef-1ab3-4d82-b763-87fcd4f531f7')]"
+                            "value": "[[parameters('effect-87ba29ef-1ab3-4d82-b763-87fcd4f531f7')]"
                         }
                         },
                         "groupNames": [
@@ -4136,7 +4158,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/51522a96-0869-4791-82f3-981000c2c67f",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-51522a96-0869-4791-82f3-981000c2c67f')]"
+                            "value": "[[parameters('effect-51522a96-0869-4791-82f3-981000c2c67f')]"
                         }
                         },
                         "groupNames": [
@@ -4149,7 +4171,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b5ec538c-daa0-4006-8596-35468b9148e8",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-b5ec538c-daa0-4006-8596-35468b9148e8')]"
+                            "value": "[[parameters('effect-b5ec538c-daa0-4006-8596-35468b9148e8')]"
                         }
                         },
                         "groupNames": [
@@ -4162,7 +4184,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/970f84d8-71b6-4091-9979-ace7e3fb6dbb",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-970f84d8-71b6-4091-9979-ace7e3fb6dbb')]"
+                            "value": "[[parameters('effect-970f84d8-71b6-4091-9979-ace7e3fb6dbb')]"
                         }
                         },
                         "groupNames": [
@@ -4175,7 +4197,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/56a5ee18-2ae6-4810-86f7-18e39ce5629b",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-56a5ee18-2ae6-4810-86f7-18e39ce5629b')]"
+                            "value": "[[parameters('effect-56a5ee18-2ae6-4810-86f7-18e39ce5629b')]"
                         }
                         },
                         "groupNames": [
@@ -4188,10 +4210,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2e94d99a-8a36-4563-bc77-810d8893b671",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-2e94d99a-8a36-4563-bc77-810d8893b671')]"
+                            "value": "[[parameters('effect-2e94d99a-8a36-4563-bc77-810d8893b671')]"
                         },
                         "enableDoubleEncryption": {
-                            "value": "[parameters('enableDoubleEncryption-2e94d99a-8a36-4563-bc77-810d8893b671')]"
+                            "value": "[[parameters('enableDoubleEncryption-2e94d99a-8a36-4563-bc77-810d8893b671')]"
                         }
                         },
                         "groupNames": [
@@ -4204,7 +4226,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1fafeaf6-7927-4059-a50a-8eb2a7a6f2b5",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1fafeaf6-7927-4059-a50a-8eb2a7a6f2b5')]"
+                            "value": "[[parameters('effect-1fafeaf6-7927-4059-a50a-8eb2a7a6f2b5')]"
                         }
                         },
                         "groupNames": [
@@ -4217,7 +4239,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/99e9ccd8-3db9-4592-b0d1-14b1715a4d8a",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-99e9ccd8-3db9-4592-b0d1-14b1715a4d8a')]"
+                            "value": "[[parameters('effect-99e9ccd8-3db9-4592-b0d1-14b1715a4d8a')]"
                         }
                         },
                         "groupNames": [
@@ -4230,7 +4252,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1f68a601-6e6d-4e42-babf-3f643a047ea2",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-1f68a601-6e6d-4e42-babf-3f643a047ea2')]"
+                            "value": "[[parameters('effect-1f68a601-6e6d-4e42-babf-3f643a047ea2')]"
                         }
                         },
                         "groupNames": [
@@ -4243,7 +4265,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f7d52b2d-e161-4dfa-a82b-55e564167385",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-f7d52b2d-e161-4dfa-a82b-55e564167385')]"
+                            "value": "[[parameters('effect-f7d52b2d-e161-4dfa-a82b-55e564167385')]"
                         }
                         },
                         "groupNames": [
@@ -4256,7 +4278,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7d7be79c-23ba-4033-84dd-45e2a5ccdd67",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-7d7be79c-23ba-4033-84dd-45e2a5ccdd67')]"
+                            "value": "[[parameters('effect-7d7be79c-23ba-4033-84dd-45e2a5ccdd67')]"
                         }
                         },
                         "groupNames": [
@@ -4269,7 +4291,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ca91455f-eace-4f96-be59-e6e2c35b4816",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-ca91455f-eace-4f96-be59-e6e2c35b4816')]"
+                            "value": "[[parameters('effect-ca91455f-eace-4f96-be59-e6e2c35b4816')]"
                         }
                         },
                         "groupNames": [
@@ -4282,7 +4304,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/702dd420-7fcc-42c5-afe8-4026edd20fe0",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-702dd420-7fcc-42c5-afe8-4026edd20fe0')]"
+                            "value": "[[parameters('effect-702dd420-7fcc-42c5-afe8-4026edd20fe0')]"
                         }
                         },
                         "groupNames": [
@@ -4369,7 +4391,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/617c02be-7f02-4efd-8836-3180d47b6c68",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-617c02be-7f02-4efd-8836-3180d47b6c68')]"
+                            "value": "[[parameters('effect-617c02be-7f02-4efd-8836-3180d47b6c68')]"
                         }
                         },
                         "groupNames": [
@@ -4382,7 +4404,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ec068d99-e9c7-401f-8cef-5bdde4e6ccf1",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-ec068d99-e9c7-401f-8cef-5bdde4e6ccf1')]"
+                            "value": "[[parameters('effect-ec068d99-e9c7-401f-8cef-5bdde4e6ccf1')]"
                         }
                         },
                         "groupNames": [
@@ -4395,10 +4417,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/c349d81b-9985-44ae-a8da-ff98d108ede8",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-c349d81b-9985-44ae-a8da-ff98d108ede8')]"
+                            "value": "[[parameters('effect-c349d81b-9985-44ae-a8da-ff98d108ede8')]"
                         },
                         "supportedSKUs": {
-                            "value": "[parameters('supportedSKUs-c349d81b-9985-44ae-a8da-ff98d108ede8')]"
+                            "value": "[[parameters('supportedSKUs-c349d81b-9985-44ae-a8da-ff98d108ede8')]"
                         }
                         },
                         "groupNames": [
@@ -4411,7 +4433,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3657f5a0-770e-44a3-b44e-9431ba1e9735",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-3657f5a0-770e-44a3-b44e-9431ba1e9735')]"
+                            "value": "[[parameters('effect-3657f5a0-770e-44a3-b44e-9431ba1e9735')]"
                         }
                         },
                         "groupNames": [
@@ -4424,7 +4446,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/b4ac1030-89c5-4697-8e00-28b5ba6a8811",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-b4ac1030-89c5-4697-8e00-28b5ba6a8811')]"
+                            "value": "[[parameters('effect-b4ac1030-89c5-4697-8e00-28b5ba6a8811')]"
                         }
                         },
                         "groupNames": [
@@ -4438,7 +4460,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ea0dfaed-95fb-448c-934e-d6e713ce393d",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-ea0dfaed-95fb-448c-934e-d6e713ce393d')]"
+                            "value": "[[parameters('effect-ea0dfaed-95fb-448c-934e-d6e713ce393d')]"
                         }
                         },
                         "groupNames": [
@@ -4452,7 +4474,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3a58212a-c829-4f13-9872-6371df2fd0b4",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-3a58212a-c829-4f13-9872-6371df2fd0b4')]"
+                            "value": "[[parameters('effect-3a58212a-c829-4f13-9872-6371df2fd0b4')]"
                         }
                         },
                         "groupNames": [
@@ -4466,7 +4488,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/24fba194-95d6-48c0-aea7-f65bf859c598",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-24fba194-95d6-48c0-aea7-f65bf859c598')]"
+                            "value": "[[parameters('effect-24fba194-95d6-48c0-aea7-f65bf859c598')]"
                         }
                         },
                         "groupNames": [
@@ -4480,7 +4502,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/4733ea7b-a883-42fe-8cac-97454c2a9e4a",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-4733ea7b-a883-42fe-8cac-97454c2a9e4a')]"
+                            "value": "[[parameters('effect-4733ea7b-a883-42fe-8cac-97454c2a9e4a')]"
                         }
                         },
                         "groupNames": [
@@ -4494,7 +4516,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f4b53539-8df9-40e4-86c6-6b607703bd4e",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-f4b53539-8df9-40e4-86c6-6b607703bd4e')]"
+                            "value": "[[parameters('effect-f4b53539-8df9-40e4-86c6-6b607703bd4e')]"
                         }
                         },
                         "groupNames": [
@@ -4508,7 +4530,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/41425d9f-d1a5-499a-9932-f8ed8453932c",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-41425d9f-d1a5-499a-9932-f8ed8453932c')]"
+                            "value": "[[parameters('effect-41425d9f-d1a5-499a-9932-f8ed8453932c')]"
                         }
                         },
                         "groupNames": [
@@ -4522,7 +4544,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/fc4d8e41-e223-45ea-9bf5-eada37891d87",
                         "parameters": {
                         "effect": {
-                            "value": "[parameters('effect-fc4d8e41-e223-45ea-9bf5-eada37891d87')]"
+                            "value": "[[parameters('effect-fc4d8e41-e223-45ea-9bf5-eada37891d87')]"
                         }
                         },
                         "groupNames": [
@@ -4614,10 +4636,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/bed48b13-6647-468e-aa2f-1af1d3f4dd40",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         },
                         "NotAvailableMachineState": {
-                            "value": "[parameters('NotAvailableMachineState-bed48b13-6647-468e-aa2f-1af1d3f4dd40')]"
+                            "value": "[[parameters('NotAvailableMachineState-bed48b13-6647-468e-aa2f-1af1d3f4dd40')]"
                         }
                         },
                         "groupNames": [
@@ -4649,22 +4671,22 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1221c620-d201-468c-81e7-2817e6107e84",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         },
                         "NetworkSecurityConfigureEncryptionTypesAllowedForKerberos": {
-                            "value": "[parameters('NetworkSecurityConfigureEncryptionTypesAllowedForKerberos-1221c620-d201-468c-81e7-2817e6107e84')]"
+                            "value": "[[parameters('NetworkSecurityConfigureEncryptionTypesAllowedForKerberos-1221c620-d201-468c-81e7-2817e6107e84')]"
                         },
                         "NetworkSecurityLANManagerAuthenticationLevel": {
-                            "value": "[parameters('NetworkSecurityLANManagerAuthenticationLevel-1221c620-d201-468c-81e7-2817e6107e84')]"
+                            "value": "[[parameters('NetworkSecurityLANManagerAuthenticationLevel-1221c620-d201-468c-81e7-2817e6107e84')]"
                         },
                         "NetworkSecurityLDAPClientSigningRequirements": {
-                            "value": "[parameters('NetworkSecurityLDAPClientSigningRequirements-1221c620-d201-468c-81e7-2817e6107e84')]"
+                            "value": "[[parameters('NetworkSecurityLDAPClientSigningRequirements-1221c620-d201-468c-81e7-2817e6107e84')]"
                         },
                         "NetworkSecurityMinimumSessionSecurityForNTLMSSPBasedIncludingSecureRPCClients": {
-                            "value": "[parameters('NetworkSecurityMinimumSessionSecurityForNTLMSSPBasedIncludingSecureRPCClients-1221c620-d201-468c-81e7-2817e6107e84')]"
+                            "value": "[[parameters('NetworkSecurityMinimumSessionSecurityForNTLMSSPBasedIncludingSecureRPCClients-1221c620-d201-468c-81e7-2817e6107e84')]"
                         },
                         "NetworkSecurityMinimumSessionSecurityForNTLMSSPBasedIncludingSecureRPCServers": {
-                            "value": "[parameters('NetworkSecurityMinimumSessionSecurityForNTLMSSPBasedIncludingSecureRPCServers-1221c620-d201-468c-81e7-2817e6107e84')]"
+                            "value": "[[parameters('NetworkSecurityMinimumSessionSecurityForNTLMSSPBasedIncludingSecureRPCServers-1221c620-d201-468c-81e7-2817e6107e84')]"
                         }
                         },
                         "groupNames": [
@@ -4678,10 +4700,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/69bf4abd-ca1e-4cf6-8b5a-762d42e61d4f",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         },
                         "MembersToExclude": {
-                            "value": "[parameters('membersToExcludeInLocalAdministratorsGroup')]"
+                            "value": "[[parameters('membersToExcludeInLocalAdministratorsGroup')]"
                         }
                         },
                         "groupNames": [
@@ -4694,10 +4716,10 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/30f71ea1-ac77-4f26-9fc5-2d926bbd4ba7",
                         "parameters": {
                         "IncludeArcMachines": {
-                            "value": "[parameters('IncludeArcMachines')]"
+                            "value": "[[parameters('IncludeArcMachines')]"
                         },
                         "MembersToInclude": {
-                            "value": "[parameters('membersToIncludeInLocalAdministratorsGroup')]"
+                            "value": "[[parameters('membersToIncludeInLocalAdministratorsGroup')]"
                         }
                         },
                         "groupNames": [
@@ -4746,7 +4768,7 @@
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f47b5582-33ec-4c5c-87c0-b010a6b2e917",
                         "parameters": {
                         "logAnalyticsWorkspaceId": {
-                            "value": "[parameters('logAnalyticsWorkspaceIDForVMAgents')]"
+                            "value": "[[parameters('logAnalyticsWorkspaceIDForVMAgents')]"
                         }
                         },
                         "groupNames": [
