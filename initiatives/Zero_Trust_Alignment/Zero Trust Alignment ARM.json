@@ -1,6 +1,20 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
+    "parameters": {
+        "logAnalytics": {
+            "type": "string",
+            "defaultValue": "logAnalyticsWorkspaceID"
+        },
+        "excludeInAdminGroup": {
+            "type": "string",
+            "defaultValue": "excludeInAdminGroup"
+        },
+        "includeInAdminGroup": {
+            "type": "string",
+            "defaultValue": "includeInAdminGroup"
+        }
+    },
     "variables": {
         "policySetName": "Zero Trust Policy Set",
         "policySetDisplayName": "Zero Trust Alignment",
