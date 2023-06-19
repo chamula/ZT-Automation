@@ -16,8 +16,8 @@
         }
     },
     "variables": {
-        "policySetName": "Zero Trust Policy Set",
-        "policySetDisplayName": "Zero Trust Alignment",
+        "policySetName": "Zero Trust Policy Set DoDZT",
+        "policySetDisplayName": "Zero Trust Alignment DoDZT",
         "policySetDescription": "This initiative helps organizations align to the Zero Trust requirements and guidance released by many organizations including:\n\n- Executive Order on Improving the Nation’s Cybersecurity\n- OMB 22-09 Moving the U.S. Government Toward Zero Trust Cybersecurity Principles\n-  CISA’s Zero Trust Maturity Model\n-  NIST’s SP 800-207, Zero Trust Architecture\n-  Department of Defense’s Zero Trust Reference Architecture\n\nand others. It only test technical requirements. No attestations."
     },
     "resources": [
