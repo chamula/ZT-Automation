@@ -839,32 +839,8 @@
                         ]
                     },
                     {
-                        "policyDefinitionReferenceId": "identityRemoveExternalAccountWithOwnerPermissionsMonitoring",
-                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f8456c1c-aa66-4dfb-861a-25d127b775c9",
-                        "parameters": {},
-                        "groupNames": [
-                            "Identity"
-                        ]
-                    },
-                    {
                         "policyDefinitionReferenceId": "2b9ad585-36bc-4615-b300-fd4435808332",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/2b9ad585-36bc-4615-b300-fd4435808332",
-                        "parameters": {},
-                        "groupNames": [
-                            "Identity"
-                        ]
-                    },
-                    {
-                        "policyDefinitionReferenceId": "identityRemoveExternalAccountWithReadPermissionsMonitoring",
-                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/5f76cf89-fbf2-47fd-a3f4-b891fa780b60",
-                        "parameters": {},
-                        "groupNames": [
-                            "Identity"
-                        ]
-                    },
-                    {
-                        "policyDefinitionReferenceId": "identityRemoveExternalAccountWithWritePermissionsMonitoring",
-                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/5c607a2e-c700-4744-8254-d77e7c9eb5e4",
                         "parameters": {},
                         "groupNames": [
                             "Identity"
@@ -916,30 +892,6 @@
                         },
                         "groupNames": [
                             "Infrastructure"
-                        ]
-                    },
-                    {
-                        "policyDefinitionReferenceId": "identityEnableMFAForOwnerPermissionsMonitoring",
-                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/aa633080-8b72-40c4-a2d7-d00c03e80bed",
-                        "parameters": {},
-                        "groupNames": [
-                            "Identity"
-                        ]
-                    },
-                    {
-                        "policyDefinitionReferenceId": "identityEnableMFAForReadPermissionsMonitoring",
-                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e3576e28-8b17-4677-84c3-db2990658d64",
-                        "parameters": {},
-                        "groupNames": [
-                            "Identity"
-                        ]
-                    },
-                    {
-                        "policyDefinitionReferenceId": "identityEnableMFAForWritePermissionsMonitoring",
-                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/9297c21d-2ed6-4474-b48f-163f75654ce3",
-                        "parameters": {},
-                        "groupNames": [
-                            "Identity"
                         ]
                     },
                     {
@@ -3218,22 +3170,20 @@
                         ]
                     },
                     {
-                        "policyDefinitionReferenceId": "[Preview]: Kubernetes clusters should gate deployment of vulnerable images_1",
-                        "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/13cd7ae3-5bc0-4ac4-a62d-4f7c120b9759",
-                        "parameters": {},
-                        "groupNames": []
-                    },
-                    {
                         "policyDefinitionReferenceId": "Azure Kubernetes Service clusters should have Defender profile enabled_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a1840de2-8088-4ea8-b153-b4c723e9cb01",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "Running container images should have vulnerability findings resolved_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0fc39691-5a3f-4e3e-94ee-2e6447309ad9",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "Cosmos DB database accounts should have local authentication methods disabled_1",
@@ -3279,7 +3229,9 @@
                         "policyDefinitionReferenceId": "Kubernetes clusters should not grant CAP_SYS_ADMIN security capabilities_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/d2e7ea85-6b44-4317-a0be-1b951587f626",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "[Preview]: Secure Boot should be enabled on supported Windows virtual machines_1",
@@ -3293,61 +3245,81 @@
                         "policyDefinitionReferenceId": "[Preview]: Guest Attestation extension should be installed on supported Windows virtual machines_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1cb4d9c2-f88f-4069-bee0-dba239a57b09",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "[Preview]: Guest Attestation extension should be installed on supported Linux virtual machines scale_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a21f8c92-9e22-4f09-b759-50500d1d2dda",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "[Preview]: Guest Attestation extension should be installed on supported Linux virtual machines_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/672fe5a1-2fcd-42d7-b85d-902b6e28c6ff",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "[Preview]: Guest Attestation extension should be installed on supported Windows virtual machines sca_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/f655e522-adff-494d-95c2-52d4f6d56a42",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "Endpoint protection should be installed on your machines_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1f7c564c-0a90-4d44-b7e1-9d456cffaee8",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "Endpoint protection health issues should be resolved on your machines_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/8e42c1f2-a2ab-49bc-994a-12bcd0dc4ac2",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "Resource logs in Azure Kubernetes Service should be enabled_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/245fc9df-fa96-4414-9a0b-3738c2f7341c",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "Azure Defender for open-source relational databases should be enabled_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0a9fbe0d-c5c4-4da8-87d8-f4fd77338835",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "Microsoft Defender CSPM should be enabled_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1f90fc71-a595-4066-8974-d4d0802e8ef0",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Infrastructure"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "[Preview]: Linux machines should encrypt temp disks, caches, and data flows between Compute and Stor_1",
                         "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/ca88aadc-6e2b-416c-9de2-5a0f01d1693f",
                         "parameters": {},
-                        "groupNames": []
+                        "groupNames": [
+                            "Data"
+                        ]
                     },
                     {
                         "policyDefinitionReferenceId": "[Preview]: Windows machines should encrypt temp disks, caches, and data flows between Compute and St_1",
