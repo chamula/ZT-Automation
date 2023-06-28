@@ -1,5 +1,9 @@
 # Microsoft Zero Trust
 This is an effort to build a custom Azure Policy Initiative incorporating DoD Zero Trust requirements with Azure builtin policy definitions.   
+
+## Why we need Zero Trust
+NIST 800-53, USGov Guidance, 
+
 ## Prerequisites 
 
 # Extracting info from prebuilt policies 
@@ -12,10 +16,12 @@ Replace the -Name string with the ID of the policy you want to extract
 
 Replace the -FilePath with the desired location of where you want to save the generated json file
 
+---
 
-# Building the Template
+# How to Build the Template
 
 This template contains five different fields: `$schema`, `resources`, `parameters`, `policyDefinitionGroups`, and `policyDefinitions`. Each section is described in more detail below.
+The simplest method is to copy and paste each section from the extracted json file into the corresponding template field.
 
 ## $Schema
 The `$schema` section is used to define the schema version of the ARM template. This is important because different versions of the schema may have different syntax and features.
