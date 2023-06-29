@@ -1,7 +1,9 @@
-# Microsoft Zero Trust
-This is an effort to build a custom Azure Policy Initiative incorporating DoD Zero Trust requirements with Azure builtin policy definitions.   
+The purpose of this repo is the house the Mission Engineering Cyber Team's effort to build a custom Azure Policy Initiative incorporating DoD Zero Trust requirements with Azure builtin policy definitions.  
 
-For example, the Microsoft Zero Trust Policy is currently a custom policy initiative assembled using builtin policy definitions applicable to our analysis of Zero Trust.  Microsoft Zero Trust helps organizations align to the Zero Trust requirements and guidance released by many organizations including: 
+
+# Microsoft Zero Trust
+
+The Microsoft Zero Trust Policy is currently a custom policy initiative assembled using builtin policy definitions applicable to our analysis of Zero Trust.  Microsoft Zero Trust helps organizations align to the Zero Trust requirements and guidance released by many organizations including: 
 - Executive Order on Improving the Nation’s Cybersecurity 
 - OMB 22-09 Moving the U.S. Government Toward Zero Trust Cybersecurity Principles
 - CISA’s Zero Trust Maturity Model
@@ -17,7 +19,8 @@ Zero Trust is the term for an “evolving set of cybersecurity paradigms that mo
 ## Prerequisites 
 
 
-# Extracting info from prebuilt policies 
+## Extracting info from prebuilt policies 
+Use the following PowerShell script within a terminal window to extract a Policy Initiative:  
 
 ```
 ((Get-AzPolicySetDefinition -Name '<policy ID found at the end of the Assignment ID>') | ConvertTo-Json -Depth 10).Replace('"PolicyType": 2', '"PolicyType": "Builtin"') | Out-File -FilePath C:\Microsoft Zero Trust.json
@@ -51,7 +54,7 @@ The `$schema` section is used to define the schema version of the ARM template. 
 
 ## Resources
 
-The `resources` section is used to define the resources that will be deployed by the ARM template. This can include virtual machines, storage accounts, networking resources, and more.  This field will contain the following `parameters`, `policyDefinitionGroups`, and `policyDefinitions` fields as properties.
+The `resources` section is used to define the resources that will be deployed by the ARM template. This can include virtual machines, storage accounts, networking resources, and more.  This field will contain the following fields: parameters, policyDefinitionGroups, and policyDefinitions as properties.
 
 - `type`: The type of the resource being ingested Ex:"Microsoft.Authorization/policySetDefinitions"
 - `apiVersion`: The API version of the resource type
